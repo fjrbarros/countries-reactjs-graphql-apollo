@@ -10,12 +10,12 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function Card(props) {
-    const { country, img } = props
+    const { country, imgPath } = props
     const classes = useStyles();
 
     return (
         <div className={classes.card}>
-            <img src={img} alt='Flag' style={{ width: '100%' }} />
+            <img src={imgPath} alt='Flag' style={{ width: '100%' }} />
             <div>
                 <h4>
                     <b>{country.name}</b>

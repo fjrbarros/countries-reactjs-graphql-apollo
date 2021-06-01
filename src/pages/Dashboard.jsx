@@ -3,7 +3,7 @@ import { ContainerGrid, Card } from '../components/index';
 import COUNTRIES from '../queries/countries';
 
 export default function Dashboard() {
-    const { loading, error, data } = useQuery(COUNTRIES);
+    const { loading, error, data } = useQuery(COUNTRIES, );
 
     if (loading) {
         return <h1>Carregando...</h1>;
@@ -18,17 +18,9 @@ export default function Dashboard() {
             {data.countries.map(country => (
                 <Card key={country.name}
                     country={country}
-                    img={`../../flags/${country.code.toLowerCase()}.png`}
+                    imgPath={require(`../flags/${country.code.toLowerCase()}.png`).default}
                 />
             ))}
         </ContainerGrid>
-        // <ul>
-        //     {
-        //         data.countries.map(item => <li key={item.name}>{item.name}</li>)
-        //     }
-        // </ul>
-        // <ContainerGrid >
-        //     {results.map(person => <Card key={person.id} person={person} />)}
-        // </ContainerGrid>
     );
 };
