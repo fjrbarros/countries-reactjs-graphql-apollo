@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/client';
-import { ContainerGrid, Card } from '../components/index';
+import { ContainerGrid, Card, TopBar } from '../components/index';
 import COUNTRIES from '../queries/countries';
 
 export default function Dashboard() {
-    const { loading, error, data } = useQuery(COUNTRIES, );
+    const { loading, error, data } = useQuery(COUNTRIES);
 
     if (loading) {
         return <h1>Carregando...</h1>;
@@ -13,7 +13,8 @@ export default function Dashboard() {
         return <h1>Houve erro</h1>;
     }
 
-    return (
+    return <>
+        <TopBar textSearch='Search...' />
         <ContainerGrid>
             {data.countries.map(country => (
                 <Card key={country.name}
@@ -22,5 +23,5 @@ export default function Dashboard() {
                 />
             ))}
         </ContainerGrid>
-    );
+    </>;
 };

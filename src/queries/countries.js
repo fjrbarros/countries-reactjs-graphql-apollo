@@ -5,6 +5,7 @@ const COUNTRIES = gql `
         countries {
             name
             code
+            capital
         }
     }
 `;

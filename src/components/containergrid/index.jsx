@@ -2,7 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
     containerGrid: {
-        backgroundColor: '#1f233e',
+        // backgroundColor: '#1f233e',
+        backgroundColor: '#f5f0f0',
         padding: '10px',
         margin: '0 auto',
         display: 'grid',
