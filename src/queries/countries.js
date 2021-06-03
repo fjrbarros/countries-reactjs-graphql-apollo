@@ -2,10 +2,13 @@ import { gql } from "@apollo/client";
 
 const COUNTRIES = gql `
     {
-        countries {
+        Country {
+            _id
             name
-            code
             capital
+            flag {
+                svgFile
+            }
         }
     }
 `;

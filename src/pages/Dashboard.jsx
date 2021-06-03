@@ -16,10 +16,11 @@ export default function Dashboard() {
     return <>
         <TopBar textSearch='Search...' />
         <ContainerGrid>
-            {data.countries.map(country => (
-                <Card key={country.name}
-                    country={country}
-                    imgPath={require(`../flags/${country.code.toLowerCase()}.png`).default}
+            {data.Country.map(country => (
+                <Card key={country._id}
+                    name={country.name}
+                    capital={country.capital}
+                    imgPath={country.flag.svgFile}
                 />
             ))}
         </ContainerGrid>

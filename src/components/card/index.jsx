@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function Card(props) {
-    const { country, imgPath } = props
+    const { name, capital, imgPath } = props
     const classes = useStyles();
 
     return (
@@ -38,10 +38,10 @@ export default function Card(props) {
                 />
                 <CardContent className={classes.cardContent}>
                     <Typography variant='h6'>
-                        <strong>Country:</strong> {country.name}
+                        <strong>Country:</strong> {name}
                     </Typography>
                     <Typography variant='h6'>
-                        <strong>Capital:</strong> {country.capital}
+                        <strong>Capital:</strong> {capital}
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.cardActions}>
