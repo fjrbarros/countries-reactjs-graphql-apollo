@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TopAppBar(props) {
     const classes = useStyles();
-    const { textSearch } = props;
+    const { textSearch, valueSearch, onChangeSearch } = props;
 
     return (
         <Box className={classes.root}>
@@ -72,6 +72,8 @@ export default function TopAppBar(props) {
                         </Box>
                         <InputBase
                             placeholder={textSearch}
+                            value={valueSearch}
+                            onChange={onChangeSearch}
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
