@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const COUNTRIES = gql `
-    {
-        Country {
+    query GetCountries($filter: _CountryFilter){
+        Country(filter: $filter) {
             _id
             name
             capital

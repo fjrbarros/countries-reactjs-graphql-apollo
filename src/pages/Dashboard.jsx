@@ -3,7 +3,9 @@ import { ContainerGrid, Card, TopBar } from '../components/index';
 import COUNTRIES from '../queries/countries';
 
 export default function Dashboard() {
-    const { loading, error, data } = useQuery(COUNTRIES);
+    const { loading, error, data } = useQuery(COUNTRIES, {
+        variables: { filter: { name_contains: "Br" } }
+    });
 
     if (loading) {
         return <h1>Carregando...</h1>;
