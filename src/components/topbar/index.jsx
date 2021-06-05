@@ -7,10 +7,7 @@ import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1,
-        position: 'sticky',
-        top: 0,
-        zIndex: 10
+        flexGrow: 1
     },
 
     search: {
@@ -40,7 +37,8 @@ const useStyles = makeStyles((theme) => ({
     },
 
     inputRoot: {
-        color: 'inherit'
+        color: 'inherit',
+        width: '100%'
     },
 
     inputInput: {
@@ -51,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             width: '12ch',
             '&:focus': {
-                width: '20ch',
+                width: '20ch'
             }
         }
     }

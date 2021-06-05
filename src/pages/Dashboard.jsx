@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
-import { ContainerGrid, Card, TopBar } from '../components/index';
+import { ContainerGrid, Card, TopBar, DefaultPage } from '../components/index';
 import COUNTRIES from '../queries/countries';
 
 export default function Dashboard() {
@@ -28,24 +28,25 @@ export default function Dashboard() {
     }
 
     return <>
-        <TopBar
-            textSearch='Search...'
+        <DefaultPage
+            textSearch='Name country'
             valueSearch={valueSearch}
             onChangeSearch={handleChangeSearch}
-        />
-        {
-            loading ?
-                <h1>Carregando...</h1> :
-                <ContainerGrid>
-                    {data?.Country.map(country => (
-                        <Card key={country._id}
-                            name={country.name}
-                            capital={country.capital}
-                            imgPath={country.flag.svgFile}
-                        />
-                    ))}
-                </ContainerGrid>
+        >
+            {
+                loading && !data ?
+                    <h1>Carregando...</h1> :
+                    <ContainerGrid>
+                        {data?.Country.map(country => (
+                            <Card key={country._id}
+                                name={country.name}
+                                capital={country.capital}
+                                imgPath={country.flag.svgFile}
+                            />
+                        ))}
+                    </ContainerGrid>
 
-        }
+            }
+        </DefaultPage>
     </>;
 };

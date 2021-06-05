@@ -2,13 +2,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
     containerGrid: {
-        // backgroundColor: '#1f233e',
-        backgroundColor: '#f5f0f0',
         padding: '10px',
         margin: '0 auto',
         display: 'grid',
         gridGap: '2rem',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))'
+        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))'
     }
 }));
 
