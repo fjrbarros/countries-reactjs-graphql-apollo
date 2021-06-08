@@ -78,7 +78,10 @@ export default function Detail(props) {
     const classes = useStyles();
     const [values, setValues] = useState(getDefaultValues);
     const [urlImg, setUrlImg] = useState('');
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: yupResolver(schema), defaultValues: getDefaultValues });
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+        resolver: yupResolver(schema),
+        defaultValues: getDefaultValues
+    });
     const [getCountry, { loading, error }] = useLazyQuery(COUNTRY_ID, {
         variables: { id },
         onCompleted: data => {

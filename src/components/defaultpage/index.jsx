@@ -9,9 +9,10 @@ const useStyles = makeStyles(() => ({
         height: '100vh'
     },
 
-    teste: {
+    containerRoot: {
         height: 'calc(100vh - 64px)',
-        overflowY: 'auto'
+        overflowY: 'auto',
+        position: 'relative'
     }
 }));
 
@@ -26,7 +27,7 @@ export default function DefaultPage(props) {
                 valueSearch={valueSearch}
                 onChangeSearch={onChangeSearch}
             />
-            <Box className={classes.teste}>
+            <Box className={classes.containerRoot}>
                 {children}
             </Box>
         </Box>
