@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
-import { ContainerGrid, Card, TopBar, DefaultPage } from '../components/index';
-import COUNTRIES from '../queries/countries';
+import { ContainerGrid, Card, DefaultPage } from '../components/index';
+import { COUNTRIES } from '../graphql/queries/countries';
 
 export default function Dashboard() {
     const [valueSearch, setValueSearch] = useState('');
@@ -42,10 +42,10 @@ export default function Dashboard() {
                                 name={country.name}
                                 capital={country.capital}
                                 imgPath={country.flag.svgFile}
+                                pathDetail={`/datail/${country._id}`}
                             />
                         ))}
                     </ContainerGrid>
-
             }
         </DefaultPage>
     </>;

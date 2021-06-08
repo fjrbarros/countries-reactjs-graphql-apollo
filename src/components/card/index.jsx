@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Image from 'material-ui-image';
 import { Card as CardMu } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
@@ -22,11 +23,15 @@ const useStyles = makeStyles(() => ({
     cardActions: {
         display: 'flex',
         justifyContent: 'flex-end'
+    },
+
+    linkDetail: {
+        textDecoration: 'none'
     }
 }));
 
 export default function Card(props) {
-    const { name, capital, imgPath } = props
+    const { name, capital, imgPath, pathDetail } = props
     const classes = useStyles();
 
     return (
@@ -45,14 +50,16 @@ export default function Card(props) {
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.cardActions}>
-                    <Button
-                        size='small'
-                        variant='outlined'
-                        color='primary'
-                        startIcon={<DetailsIcon />}
-                    >
-                        details
-                    </Button>
+                    <Link to={pathDetail} className={classes.linkDetail}>
+                        <Button
+                            size='small'
+                            variant='outlined'
+                            color='primary'
+                            startIcon={<DetailsIcon />}
+                        >
+                            details
+                        </Button>
+                    </Link>
                 </CardActions>
             </CardMu>
         </Paper>

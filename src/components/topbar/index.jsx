@@ -64,20 +64,23 @@ export default function TopAppBar(props) {
             <AppBar position='static'>
                 <Toolbar>
                     <Box flex={1} />
-                    <Box className={classes.search}>
-                        <Box className={classes.searchIcon}>
-                            <SearchIcon />
+                    {
+                        onChangeSearch &&
+                        <Box className={classes.search}>
+                            <Box className={classes.searchIcon}>
+                                <SearchIcon />
+                            </Box>
+                            <InputBase
+                                placeholder={textSearch}
+                                value={valueSearch}
+                                onChange={onChangeSearch}
+                                classes={{
+                                    root: classes.inputRoot,
+                                    input: classes.inputInput,
+                                }}
+                            />
                         </Box>
-                        <InputBase
-                            placeholder={textSearch}
-                            value={valueSearch}
-                            onChange={onChangeSearch}
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                        />
-                    </Box>
+                    }
                 </Toolbar>
             </AppBar>
         </Box>
