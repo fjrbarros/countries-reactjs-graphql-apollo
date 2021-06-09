@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
-import { DefaultPage } from '../components/index';
+import { DefaultPage, Loading, Error } from '../components/index';
 import { COUNTRY_ID } from '../graphql/queries/countries';
 import { makeStyles } from '@material-ui/core/styles';
 import { validateForm } from '../util/index';
@@ -89,7 +89,7 @@ export default function Detail(props) {
     }, [getCountry, id]);
 
     if (error) {
-        return <h1>Houve erro</h1>;
+        return <Error />;
     }
 
     function handleChange(event) {
@@ -112,7 +112,7 @@ export default function Detail(props) {
         <DefaultPage>
             {
                 loading ?
-                    <h1>Carregando...</h1> :
+                    <Loading /> :
                     <Container className={classes.root}>
                         <Box className={classes.containerImg}>
                             <Image

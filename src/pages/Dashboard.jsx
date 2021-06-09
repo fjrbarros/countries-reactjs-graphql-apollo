@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
-import { ContainerGrid, Card, DefaultPage } from '../components/index';
+import { ContainerGrid, Card, DefaultPage, Loading, Error } from '../components/index';
 import { COUNTRIES } from '../graphql/queries/countries';
 import { useSelector, useDispatch } from 'react-redux';
 import { setDataCountry } from '../redux/country/actions';
@@ -25,25 +25,11 @@ export default function Dashboard() {
     }, [valueSearch, getCountries]);
 
     if (error) {
-        return <h1>Houve erro</h1>;
+        return <Error />;
     }
 
     function handleChangeSearch(event) {
         setValueSearch(event.target.value);
-    }
-
-    function getDataUpdateLocalStorage(data) {
-        const keysLocalStorage = Object.keys(localStorage);
-
-        keysLocalStorage.map(itemStorage => {
-            const findItem = data.findIndex(item => parseInt(item._id, 10) === parseInt(itemStorage.split('-')[1], 10));
-
-            if (findItem !== -1) {
-                data[findItem].name = 'aaaaaaaaaaaaaaaa';
-            }
-        });
-
-        return data;
     }
 
     return <>
@@ -54,7 +40,7 @@ export default function Dashboard() {
         >
             {
                 loading && !data ?
-                    <h1>Carregando...</h1> :
+                    <Loading /> :
                     <ContainerGrid>
                         {data.map(country => {
                             let name = country.name;
