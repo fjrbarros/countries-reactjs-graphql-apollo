@@ -1,20 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { DefaultPage } from '../components/index';
 import { COUNTRY_ID } from '../graphql/queries/countries';
 import { makeStyles } from '@material-ui/core/styles';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { validateForm } from '../util/index';
 import Container from '@material-ui/core/Container';
 import Image from 'material-ui-image';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import Box from '@material-ui/core/Box';
-
-
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -55,14 +51,6 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const schema = yup.object().shape({
-    name: yup.string().trim().required('Nome obrigatório'),
-    capital: yup.string().trim().required('Capital obrigatório'),
-    area: yup.string().trim().required('Área obrigatório'),
-    population: yup.number().typeError('Você deve especificar um número').required('População obrigatório'),
-    topLevelDomain: yup.string().trim().required('Top-level domain obrigatório')
-});
-
 function getDefaultValues() {
     return {
         name: '',
@@ -77,18 +65,14 @@ export default function Detail(props) {
     const { id } = useParams();
     const classes = useStyles();
     const [values, setValues] = useState(getDefaultValues);
+    const [errors, setErrors] = useState(getDefaultValues);
     const [urlImg, setUrlImg] = useState('');
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-        defaultValues: getDefaultValues
-    });
     const [getCountry, { loading, error }] = useLazyQuery(COUNTRY_ID, {
         variables: { id },
         onCompleted: data => {
             data = data.Country[0];
             setUrlImg(data.flag.svgFile);
             setValues({ ...values, ...data, topLevelDomain: data.topLevelDomains[0].name });
-            reset({ ...data, topLevelDomain: data.topLevelDomains[0].name });
         }
     });
 
@@ -99,11 +83,10 @@ export default function Detail(props) {
             const jsonParseData = JSON.parse(itemSaveLocal);
             setValues(jsonParseData);
             setUrlImg(jsonParseData.urlImg);
-            reset(jsonParseData);
         } else {
             getCountry();
         }
-    }, [getCountry, id, reset]);
+    }, [getCountry, id]);
 
     if (error) {
         return <h1>Houve erro</h1>;
@@ -113,9 +96,16 @@ export default function Detail(props) {
         setValues({ ...values, [event.target.name]: event.target.value });
     }
 
-    function onHandleSubmit() {
-        localStorage.setItem(`country-${id}`, JSON.stringify({ ...values, urlImg }));
-        setValues(getDefaultValues);
+    function handleSubmit(event) {
+        event.preventDefault();
+        const errors = {};
+        validateForm(values, (campo, msg) => errors[campo] = msg);
+        setErrors(errors);
+
+        if (Object.keys(errors).length === 0) {
+            localStorage.setItem(`country-${id}`, JSON.stringify({ ...values, urlImg }));
+            setValues(getDefaultValues);
+        }
     }
 
     return (
@@ -126,13 +116,18 @@ export default function Detail(props) {
                     <Container className={classes.root}>
                         <Box className={classes.containerImg}>
                             <Image
-                                imageStyle={{ borderRadius: '50%', height: '200px', width: '200px', position: 'relative' }}
+                                imageStyle={{
+                                    borderRadius: '50%',
+                                    height: '200px',
+                                    width: '200px',
+                                    position: 'relative'
+                                }}
                                 aspectRatio={(16 / 10)}
                                 src={urlImg}
                             />
                         </Box>
                         <form
-                            onSubmit={handleSubmit(onHandleSubmit)}
+                            onSubmit={handleSubmit}
                             className={classes.form}
                             autoComplete='off'
                         >
@@ -140,9 +135,8 @@ export default function Detail(props) {
                                 className={classes.input}
                                 label='Name'
                                 name='name'
-                                error={!!errors?.name?.message}
-                                helperText={errors?.name?.message}
-                                {...register('name')}
+                                error={!!errors.name}
+                                helperText={errors.name}
                                 value={values.name}
                                 onChange={handleChange}
                             />
@@ -150,9 +144,8 @@ export default function Detail(props) {
                                 className={classes.input}
                                 label='Capital'
                                 name='capital'
-                                error={!!errors?.capital?.message}
-                                helperText={errors?.capital?.message}
-                                {...register('capital')}
+                                error={!!errors.capital}
+                                helperText={errors.capital}
                                 value={values.capital}
                                 onChange={handleChange}
                             />
@@ -160,9 +153,9 @@ export default function Detail(props) {
                                 className={classes.input}
                                 label='Area'
                                 name='area'
-                                error={!!errors?.area?.message}
-                                helperText={errors?.area?.message}
-                                {...register('area')}
+                                type='number'
+                                error={!!errors.area}
+                                helperText={errors.area}
                                 value={values.area}
                                 onChange={handleChange}
                             />
@@ -171,9 +164,8 @@ export default function Detail(props) {
                                 label='Population'
                                 name='population'
                                 type='number'
-                                error={!!errors?.population?.message}
-                                helperText={errors?.population?.message}
-                                {...register('population')}
+                                error={!!errors.population}
+                                helperText={errors.population}
                                 value={values.population}
                                 onChange={handleChange}
                             />
@@ -181,9 +173,8 @@ export default function Detail(props) {
                                 className={classes.input}
                                 label='Top-level domain'
                                 name='topLevelDomain'
-                                error={!!errors?.topLevelDomain?.message}
-                                helperText={errors?.topLevelDomain?.message}
-                                {...register('topLevelDomain')}
+                                error={!!errors.topLevelDomain}
+                                helperText={errors.topLevelDomain}
                                 value={values.topLevelDomain}
                                 onChange={handleChange}
                             />
