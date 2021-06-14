@@ -16,9 +16,8 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export default function DefaultPage(props) {
+export default function DefaultPage({ textSearch, valueSearch, onChangeSearch, children }) {
     const classes = useStyles();
-    const { textSearch, valueSearch, onChangeSearch, children } = props;
 
     return (
         <Box className={classes.root}>

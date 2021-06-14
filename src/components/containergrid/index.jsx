@@ -10,8 +10,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export default function ContainerGrid(props) {
-    const { children } = props;
+export default function ContainerGrid({ children }) {
     const classes = useStyles();
 
     return (

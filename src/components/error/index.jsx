@@ -17,9 +17,8 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export default function Error(props) {
+export default function Error({ textError }) {
     const classes = useStyles();
-    const { textError } = props;
 
     return (
         <Box className={classes.root}>

@@ -55,9 +55,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function TopAppBar(props) {
+export default function TopAppBar({ textSearch, valueSearch, onChangeSearch }) {
     const classes = useStyles();
-    const { textSearch, valueSearch, onChangeSearch } = props;
 
     return (
         <Box className={classes.root}>

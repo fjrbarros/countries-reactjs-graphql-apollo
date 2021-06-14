@@ -61,14 +61,15 @@ function getDefaultValues() {
     }
 }
 
-export default function Detail(props) {
+export default function Detail() {
     const { id } = useParams();
     const classes = useStyles();
     const [values, setValues] = useState(getDefaultValues);
     const [errors, setErrors] = useState(getDefaultValues);
     const [urlImg, setUrlImg] = useState('');
-    const [getCountry, { loading, error }] = useLazyQuery(COUNTRY_ID, {
+    const [getCountry, { loading, error, data }] = useLazyQuery(COUNTRY_ID, {
         variables: { id },
+        fetchPolicy: 'cache-and-network',
         onCompleted: data => {
             data = data.Country[0];
             setUrlImg(data.flag.svgFile);
@@ -87,6 +88,10 @@ export default function Detail(props) {
             getCountry();
         }
     }, [getCountry, id]);
+
+    if (loading && !data?.length) {
+        return <Loading />;
+    }
 
     if (error) {
         return <Error />;
@@ -110,87 +115,82 @@ export default function Detail(props) {
 
     return (
         <DefaultPage>
-            {
-                loading ?
-                    <Loading /> :
-                    <Container className={classes.root}>
-                        <Box className={classes.containerImg}>
-                            <Image
-                                imageStyle={{
-                                    borderRadius: '50%',
-                                    height: '200px',
-                                    width: '200px',
-                                    position: 'relative'
-                                }}
-                                aspectRatio={(16 / 10)}
-                                src={urlImg}
-                            />
-                        </Box>
-                        <form
-                            onSubmit={handleSubmit}
-                            className={classes.form}
-                            autoComplete='off'
-                        >
-                            <TextField
-                                className={classes.input}
-                                label='Name'
-                                name='name'
-                                error={!!errors.name}
-                                helperText={errors.name}
-                                value={values.name}
-                                onChange={handleChange}
-                            />
-                            <TextField
-                                className={classes.input}
-                                label='Capital'
-                                name='capital'
-                                error={!!errors.capital}
-                                helperText={errors.capital}
-                                value={values.capital}
-                                onChange={handleChange}
-                            />
-                            <TextField
-                                className={classes.input}
-                                label='Area'
-                                name='area'
-                                type='number'
-                                error={!!errors.area}
-                                helperText={errors.area}
-                                value={values.area}
-                                onChange={handleChange}
-                            />
-                            <TextField
-                                className={classes.input}
-                                label='Population'
-                                name='population'
-                                type='number'
-                                error={!!errors.population}
-                                helperText={errors.population}
-                                value={values.population}
-                                onChange={handleChange}
-                            />
-                            <TextField
-                                className={classes.input}
-                                label='Top-level domain'
-                                name='topLevelDomain'
-                                error={!!errors.topLevelDomain}
-                                helperText={errors.topLevelDomain}
-                                value={values.topLevelDomain}
-                                onChange={handleChange}
-                            />
-                            <Button
-                                variant='contained'
-                                color='primary'
-                                className={classes.saveButton}
-                                startIcon={<SaveIcon />}
-                                type='submit'
-                            >
-                                Save
-                            </Button>
-                        </form>
-                    </Container>
-
-            }
+            <Container className={classes.root}>
+                <Box className={classes.containerImg}>
+                    <Image
+                        imageStyle={{
+                            borderRadius: '50%',
+                            height: '200px',
+                            width: '200px',
+                            position: 'relative'
+                        }}
+                        aspectRatio={16 / 10}
+                        src={urlImg}
+                    />
+                </Box>
+                <form
+                    onSubmit={handleSubmit}
+                    className={classes.form}
+                    autoComplete='off'
+                >
+                    <TextField
+                        className={classes.input}
+                        label='Name'
+                        name='name'
+                        error={!!errors.name}
+                        helperText={errors.name}
+                        value={values.name}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        className={classes.input}
+                        label='Capital'
+                        name='capital'
+                        error={!!errors.capital}
+                        helperText={errors.capital}
+                        value={values.capital}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        className={classes.input}
+                        label='Area'
+                        name='area'
+                        type='number'
+                        error={!!errors.area}
+                        helperText={errors.area}
+                        value={values.area}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        className={classes.input}
+                        label='Population'
+                        name='population'
+                        type='number'
+                        error={!!errors.population}
+                        helperText={errors.population}
+                        value={values.population}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        className={classes.input}
+                        label='Top-level domain'
+                        name='topLevelDomain'
+                        error={!!errors.topLevelDomain}
+                        helperText={errors.topLevelDomain}
+                        value={values.topLevelDomain}
+                        onChange={handleChange}
+                    />
+                    <Button
+                        variant='contained'
+                        color='primary'
+                        className={classes.saveButton}
+                        startIcon={<SaveIcon />}
+                        type='submit'
+                    >
+                        Save
+                    </Button>
+                </form>
+            </Container>
         </DefaultPage>
     );
 }

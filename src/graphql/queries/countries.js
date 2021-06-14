@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const COUNTRIES = gql`
-    query GetCountries($filter: _CountryFilter){
-        Country(filter: $filter) {
+    query GetCountries($filter: String){
+        countries: Country(filter: { OR: [{ name_contains: $filter }, { alpha3Code_contains: $filter }] }) {
             _id
             name
             capital

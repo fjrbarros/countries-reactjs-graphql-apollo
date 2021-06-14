@@ -6,23 +6,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setDataCountry } from '../redux/country/actions';
 
 export default function Dashboard() {
-    const [valueSearch, setValueSearch] = useState('');
     const dispatch = useDispatch();
+    const [valueSearch, setValueSearch] = useState('');
     const data = useSelector(state => state.dataCountry);
     const [getCountries, { loading, error }] = useLazyQuery(COUNTRIES, {
-        variables: {
-            filter: {
-                name_contains: valueSearch
-            }
-        },
-        onCompleted: data => dispatch(Object.assign(setDataCountry(), { data: data.Country }))
+        variables: { filter: valueSearch },
+        onCompleted: data => dispatch(Object.assign(setDataCountry(), { data: data.countries }))
     });
 
-    useEffect(() => {
-        const handler = setTimeout(() => getCountries(), 500);
+    useEffect(() => getCountries(), [valueSearch, getCountries]);
 
-        return () => clearTimeout(handler);
-    }, [valueSearch, getCountries]);
+    if (loading && !data.length) {
+        return <Loading />;
+    }
 
     if (error) {
         return <Error />;
@@ -32,39 +28,27 @@ export default function Dashboard() {
         setValueSearch(event.target.value);
     }
 
-    return <>
+    return (
         <DefaultPage
             textSearch='Name country'
             valueSearch={valueSearch}
             onChangeSearch={handleChangeSearch}
         >
-            {
-                loading && !data ?
-                    <Loading /> :
-                    <ContainerGrid>
-                        {data.map(country => {
-                            let name = country.name;
-                            let capital = country.capital;
+            <ContainerGrid>
+                {data.map(country => {
+                    const itemSaveLocal = localStorage.getItem(`country-${country._id}`);
+                    const { name, capital } = itemSaveLocal ? JSON.parse(itemSaveLocal) : country;
 
-                            let itemSaveLocal = localStorage.getItem(`country-${country._id}`);
-
-                            if (itemSaveLocal) {
-                                let itemParse = JSON.parse(itemSaveLocal);
-                                name = itemParse.name;
-                                capital = itemParse.capital;
-                            }
-
-                            return (
-                                <Card key={country._id}
-                                    name={name}
-                                    capital={capital}
-                                    imgPath={country.flag.svgFile}
-                                    pathDetail={`/datail/${country._id}`}
-                                />
-                            )
-                        })}
-                    </ContainerGrid>
-            }
+                    return (
+                        <Card key={country._id}
+                            name={name}
+                            capital={capital}
+                            imgPath={country.flag.svgFile}
+                            pathDetail={`/datail/${country._id}`}
+                        />
+                    )
+                })}
+            </ContainerGrid>
         </DefaultPage>
-    </>;
+    );
 };

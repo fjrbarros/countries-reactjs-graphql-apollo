@@ -30,15 +30,14 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export default function Card(props) {
-    const { name, capital, imgPath, pathDetail } = props
+export default function Card({ name, capital, imgPath, pathDetail }) {
     const classes = useStyles();
 
     return (
         <Paper elevation={3}>
             <CardMu className={classes.card}>
                 <Image
-                    aspectRatio={(16 / 10)}
+                    aspectRatio={16 / 10}
                     src={imgPath}
                 />
                 <CardContent className={classes.cardContent}>

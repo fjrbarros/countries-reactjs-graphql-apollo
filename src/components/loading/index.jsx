@@ -5,8 +5,8 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(() => ({
     root: {
-        height: '100%',
-        width: '100%',
+        height: '100vh',
+        width: '100vw',
         backgroundColor: '#ffff',
         display: 'flex',
         justifyContent: 'center',
@@ -23,9 +23,8 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export default function Loading(props) {
+export default function Loading({ textLoading }) {
     const classes = useStyles();
-    const { textLoading } = props;
 
     return (
         <Box className={classes.root}>
