@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
-import { ContainerGrid, Card, DefaultPage, Loading, Error } from '../components/index';
+import { ContainerGrid, Card, PageWrapper, Loading, Error } from '../components/index';
 import { COUNTRIES } from '../graphql/queries/countries';
 import { useSelector, useDispatch } from 'react-redux';
 import { setDataCountry } from '../redux/country/actions';
@@ -29,7 +29,7 @@ export default function Dashboard() {
     }
 
     return (
-        <DefaultPage
+        <PageWrapper
             textSearch='Name country'
             valueSearch={valueSearch}
             onChangeSearch={handleChangeSearch}
@@ -49,6 +49,6 @@ export default function Dashboard() {
                     )
                 })}
             </ContainerGrid>
-        </DefaultPage>
+        </PageWrapper>
     );
 };

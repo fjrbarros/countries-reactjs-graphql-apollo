@@ -1,6 +1,6 @@
-export { default as ContainerGrid } from './containergrid/index';
-export { default as Card } from './card/index';
-export { default as TopBar } from './topbar/index';
-export { default as DefaultPage } from './defaultpage/index';
-export { default as Loading } from './loading/index';
-export { default as Error } from './error/index';
+export { default as ContainerGrid } from './containergrid';
+export { default as Card } from './card';
+export { default as TopBar } from './topbar';
+export { default as PageWrapper } from './pagewrapper';
+export { default as Loading } from './loading';
+export { default as Error } from './error';

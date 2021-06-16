@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
-import { DefaultPage, Loading, Error } from '../components/index';
+import { PageWrapper, Loading, Error } from '../components/index';
 import { COUNTRY_ID } from '../graphql/queries/countries';
 import { makeStyles } from '@material-ui/core/styles';
 import { validateForm } from '../util/index';
@@ -114,7 +114,7 @@ export default function Detail() {
     }
 
     return (
-        <DefaultPage>
+        <PageWrapper>
             <Container className={classes.root}>
                 <Box className={classes.containerImg}>
                     <Image
@@ -191,6 +191,6 @@ export default function Detail() {
                     </Button>
                 </form>
             </Container>
-        </DefaultPage>
+        </PageWrapper>
     );
 }
