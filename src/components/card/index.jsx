@@ -39,6 +39,7 @@ export default function Card({ name, capital, imgPath, pathDetail }) {
                 <Image
                     aspectRatio={16 / 10}
                     src={imgPath}
+                    alt={`${name} flag`}
                 />
                 <CardContent className={classes.cardContent}>
                     <Typography variant='h6'>

@@ -44,7 +44,7 @@ export default function Dashboard() {
                             name={name}
                             capital={capital}
                             imgPath={country.flag.svgFile}
-                            pathDetail={`/datail/${country._id}`}
+                            pathDetail={`/detail/${country._id}`}
                         />
                     )
                 })}

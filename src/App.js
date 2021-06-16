@@ -9,7 +9,7 @@ export default function App() {
     <BrowserRouter >
       <Switch >
         <Route exact path='/' component={Dashboard} />
-        < Route exact path='/datail/:id' component={Detail} />
+        < Route exact path='/detail/:id' component={Detail} />
         < Route component={NotFound} />
       </Switch>
     </BrowserRouter>
