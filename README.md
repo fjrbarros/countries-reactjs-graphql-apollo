@@ -1,4 +1,4 @@
-# Simples aplicação de consulta com  [https://reactjs.org/](Reacjs), [https://graphql.org/](GraphQl) e  [https://www.apollographql.com/docs/](Apollo Client).
+# Simples aplicação de consulta com  [ReacJs](https://reactjs.org/), [GraphQl](https://graphql.org/) e  [Apollo Client](https://www.apollographql.com/docs/).
 
 ## Introdução
 
@@ -12,10 +12,10 @@ O aplicativo pode ser acessado através da url [http://country-graphql.herokuapp
 
 ## Em sua máquina
 
-Para usar e alterar este aplicativo, você precisa ter instalados o [https://nodejs.org/en/](NodeJs) e o [https://www.npmjs.com/](Npm).
+Para usar e alterar este aplicativo, você precisa ter instalados o [NodeJs](https://nodejs.org/en/) e o [Npm](https://www.npmjs.com/).
 Basta realizar o clone deste projeto.
-Use o ### `npm install` para instalar as dependências.
-Use o ### `npm start` para inciar a aplicação.
+Use o `npm install` para instalar as dependências.
+Use o `npm start` para inciar a aplicação.
 
 Você pode executar alguns testes também.
 Para isso basta executar o comando.
