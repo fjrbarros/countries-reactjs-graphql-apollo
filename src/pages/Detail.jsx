@@ -94,7 +94,7 @@ export default function Detail() {
     }
 
     if (error) {
-        return <Error />;
+        <Error textError= {error.message || 'Erro ao recuperar dados.'}/>;
     }
 
     function handleChange(event) {

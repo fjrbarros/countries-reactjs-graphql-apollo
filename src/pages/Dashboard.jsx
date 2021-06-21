@@ -21,7 +21,7 @@ export default function Dashboard() {
     }
 
     if (error) {
-        return <Error />;
+        return <Error textError= {error.message || 'Erro ao recuperar dados.'}/>;
     }
 
     function handleChangeSearch(event) {

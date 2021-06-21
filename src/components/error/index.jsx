@@ -1,18 +1,18 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { PageWrapper } from '../index';
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(() => ({
     root: {
-        height: '100vh',
-        width: '100vw',
-        backgroundColor: '#110c1d',
+        height: '100%',
+        width: '100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         '& p': {
             fontSize: '25px',
-            color: '#ff0000'
+            color: '#414141'
         }
     }
 }));
@@ -21,8 +21,10 @@ export default function Error({ textError }) {
     const classes = useStyles();
 
     return (
-        <Box className={classes.root}>
-            <Typography>{textError || 'Erro ao recuperar dados.'}</Typography>
-        </Box>
+        <PageWrapper>
+            <Box className={classes.root}>
+                <Typography>{textError}</Typography>
+            </Box>
+        </PageWrapper>
     );
 }
