@@ -1,11 +1,17 @@
 import { cleanup } from '@testing-library/react';
-import { Card, ContainerGrid } from '../../components/index';
-import { RenderComponent, cardProps } from '../util';
+import { PageWrapper } from '../../components/index';
+import { pageWrapperProps, renderComponent } from '../util';
 
 describe('Page', () => {
-    afterEach(cleanup);
+  afterEach(cleanup);
 
-    it('Child', () => {
-      //todo
-    });
+  it('Child exists', () => {
+    const root = renderComponent(
+      <PageWrapper {...pageWrapperProps} >
+        <span>Teste</span>
+      </PageWrapper>
+    );
+
+    root.getByText('Teste');
+  });
 });

@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
-    uri: 'http://testefront.dev.softplan.com.br/',
+    uri: 'http://testefront.dev.softplan.com.dbr/',
     cache: new InMemoryCache()
 });
 

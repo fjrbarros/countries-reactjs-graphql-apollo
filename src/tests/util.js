@@ -31,3 +31,9 @@ export const topBarProps = {
     valueSearch: '',
     onChangeSearch: jest.fn()
 }
+
+export const pageWrapperProps = {
+    textSearch: 'Country name...',
+    valueSearch: 'Brazil',
+    onChangeSearch: jest.fn()
+}

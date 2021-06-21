@@ -2,16 +2,16 @@ import { cleanup } from '@testing-library/react';
 import { ContainerGrid } from '../../components/index';
 import { renderComponent } from '../util';
 
-describe('Container grid test', () => {
+describe('Container grid', () => {
     afterEach(cleanup);
 
-    it('Child test', () => {
+    it('Child exists', () => {
         const { getByText } = renderComponent(
             <ContainerGrid>
-                <span>test</span>
+                <span>teste</span>
             </ContainerGrid>
         );
 
-        getByText('test');
+        getByText('teste');
     });
 });
