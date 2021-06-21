@@ -1,4 +1,4 @@
-# Simples aplicação de consulta com Reacjs, GraphQl e Apollo Client.
+# Simples aplicação de consulta com  [https://reactjs.org/](Reacjs), [https://graphql.org/](GraphQl) e  [https://www.apollographql.com/docs/](Apollo Client).
 
 ## Introdução
 
