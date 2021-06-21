@@ -1,6 +1,4 @@
-# Getting Started with Create React App
-
-Simples aplicação de consulta com Reacjs, GraphQl e Apollo Client.
+# Simples aplicação de consulta com Reacjs, GraphQl e Apollo Client.
 
 ## Introdução
 
